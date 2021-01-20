@@ -208,7 +208,13 @@ var InputfieldImageReference = {
 
     },
     getFieldconfig: function (field) {
-        return config = ProcessWire.config.InputfieldImageReference[field.querySelector('input').getAttribute('data-fieldname')];
+        //return config = ProcessWire.config.InputfieldImageReference[field.querySelector('input').getAttribute('data-fieldname')];
+        
+        //hack for use inside repeater items - remove the _repeater### part from fieldname
+        tmp = field.querySelector('input').getAttribute('data-fieldname').split("_repeater");
+        // console.log(tmp[0]);
+        return config = ProcessWire.config.InputfieldImageReference[tmp[0]];
+     
     },
     buildParams: function (config, pageid, folderpath) {
         var data = {};
