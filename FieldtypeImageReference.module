@@ -583,7 +583,7 @@ class FieldtypeImageReference extends Fieldtype
             $hasImagefield = false;
             $imagespage = $this->pages->get("id={$field->imagespage}, include=hidden");
             foreach ($imagespage->fieldgroup as $f) {
-                if ($f->type instanceof FieldtypeImage) {
+                if ($f->type instanceof FieldtypeImage || $f->type instanceof FieldtypeCroppableImage3) {
                     $hasImagefield = true;
                     break;
                 }
@@ -756,7 +756,7 @@ class FieldtypeImageReference extends Fieldtype
             $f->label = $this->_("Choose image fields that supply images");
             $f->description = $this->_('Images from these fields will be supplied to the image picker.');
             $f->required(1);
-            $fields = $this->wire('fields')->find('type=FieldtypeImage');
+            $fields = $this->wire('fields')->find('type=FieldtypeImage||FieldtypeCroppableImage3');
             $options = array();
             foreach ($fields as $fd) $options[$fd->name] = $fd->name;
             $f->options = $options;
